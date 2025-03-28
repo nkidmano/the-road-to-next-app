@@ -1,24 +1,34 @@
-import { redirect } from 'next/navigation'
-import { initialTickets } from '@/data'
-import { ticketsPath } from '@/path'
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import { Placeholder } from "@/components/placeholder";
+import { Button } from "@/components/ui/button";
+import { initialTickets } from "@/data";
+import { ticketsPath } from "@/path";
 
 type TicketPageProps = {
-  params: Promise<{ ticketId: string }>
-}
+  params: Promise<{ ticketId: string }>;
+};
 
 export default async function TicketPage({ params }: TicketPageProps) {
-  const { ticketId } = await params
+  const { ticketId } = await params;
 
   if (!ticketId) {
-    redirect(ticketsPath())
+    redirect(ticketsPath());
   }
 
-  const ticket = initialTickets.find(ticket => ticket.id === ticketId)
+  const ticket = initialTickets.find((ticket) => ticket.id === ticketId);
 
   if (!ticket) {
     return (
-      <p>Ticket not found</p>
-    )
+      <Placeholder
+        label="Ticket not found"
+        button={
+          <Button asChild variant="outline">
+            <Link href={ticketsPath()}>Go back to tickets</Link>
+          </Button>
+        }
+      />
+    );
   }
 
   return (
@@ -26,5 +36,5 @@ export default async function TicketPage({ params }: TicketPageProps) {
       <h2 className="text-lg">{ticket.title}</h2>
       <p>{ticket.content}</p>
     </div>
-  )
+  );
 }
