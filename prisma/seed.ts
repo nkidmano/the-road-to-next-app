@@ -16,7 +16,7 @@ const tickets = [
   {
     title: "Create a new service",
     content: "Create a new service using Angular CLI (Database)",
-    status: TicketStatus.IN_INPROGRESS,
+    status: TicketStatus.IN_PROGRESS,
   },
   {
     title: "Create a new module",

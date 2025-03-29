@@ -11,7 +11,8 @@
     "type": "tsc --noEmit",
     "postinstall": "prisma generate",
     "prisma-seed": "tsx prisma/seed.ts",
-    "prisma-studio": "prisma studio"
+    "prisma-studio": "prisma studio",
+    "prisma-db-push": "prisma db push"
   },
   "dependencies": {
     "@prisma/client": "^6.5.0",
