@@ -1,5 +1,3 @@
-"use client";
-
 import { Ticket } from "@prisma/client";
 import { clsx } from "clsx";
 import { SquareArrowOutUpRight, Trash } from "lucide-react";
