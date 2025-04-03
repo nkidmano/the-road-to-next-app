@@ -3,10 +3,16 @@ import { clsx } from "clsx";
 import { Pencil, SquareArrowOutUpRight, Trash } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 import { deleteTicket } from "@/features/ticket/actions/delete-ticket";
 import { TICKET_ICONS } from "@/features/ticket/constants";
 import { ticketEditPath, ticketPath } from "@/path";
+import { toCurrency } from "@/utils/currency";
 
 type TicketItemProps = {
   ticket: Ticket;
@@ -59,6 +65,12 @@ export function TicketItem({ ticket, isDetail }: TicketItemProps) {
             {ticket.content}
           </p>
         </CardContent>
+        <CardFooter className="flex justify-between">
+          <p className="text-sm text-muted-foreground">{ticket.deadline}</p>
+          <p className="text-sm text-muted-foreground">
+            {toCurrency(ticket.bounty)}
+          </p>
+        </CardFooter>
       </Card>
       <div className="flex flex-col gap-y-2">
         {isDetail ? (
