@@ -4,10 +4,13 @@ import { Heading } from "@/components/heading";
 import { Spinner } from "@/components/spinner";
 import { TicketList } from "@/features/ticket/components/ticket-list";
 import { TicketUpsertForm } from "@/features/ticket/components/ticket-upsert-form";
+import { getBaseUrl } from "@/utils/url";
 
 // export const revalidate = 10;
 
 export default async function TicketsPage() {
+  console.log(getBaseUrl());
+
   return (
     <div className="flex-1 flex flex-col gap-y-8">
       <Heading
