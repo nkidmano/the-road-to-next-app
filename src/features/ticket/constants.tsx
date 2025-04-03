@@ -5,3 +5,9 @@ export const TICKET_ICONS = {
   DONE: <CircleCheck />,
   IN_PROGRESS: <Pencil />,
 };
+
+export const TICKET_STATUS_LABELS = {
+  OPEN: "Open",
+  DONE: "Done",
+  IN_PROGRESS: "In Progress",
+};
