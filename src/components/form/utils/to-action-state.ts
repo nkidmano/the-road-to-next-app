@@ -17,8 +17,9 @@ export const INITIAL_ACTION_STATE: ActionState = {
 export function toActionState(
   status: ActionState["status"],
   message: string,
+  formData?: FormData,
 ): ActionState {
-  return { ...INITIAL_ACTION_STATE, status, message };
+  return { ...INITIAL_ACTION_STATE, status, message, payload: formData };
 }
 
 export function fromErrorToActionState(
