@@ -9,6 +9,8 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
+import { getAuth } from "@/features/auth/actions/get-auth";
+import { isOwner } from "@/features/auth/utils/is-owner";
 import { TicketMoreMenu } from "@/features/ticket/components/ticket-more-menu";
 import { TICKET_ICONS } from "@/features/ticket/constants";
 import { ticketEditPath, ticketPath } from "@/path";
@@ -27,7 +29,10 @@ type TicketItemProps = {
   isDetail?: boolean;
 };
 
-export function TicketItem({ ticket, isDetail }: TicketItemProps) {
+export async function TicketItem({ ticket, isDetail }: TicketItemProps) {
+  const { user } = await getAuth();
+  const isTicketOwner = isOwner(user, ticket);
+
   const detailButton = (
     <Button asChild variant="outline" size="icon">
       <Link href={ticketPath(ticket.id)}>
@@ -87,14 +92,16 @@ export function TicketItem({ ticket, isDetail }: TicketItemProps) {
       </Card>
       <div className="flex flex-col gap-y-2">
         {isDetail ? (
-          <>
-            {editButton}
-            {moreMenu}
-          </>
+          isTicketOwner && (
+            <>
+              {editButton}
+              {moreMenu}
+            </>
+          )
         ) : (
           <>
             {detailButton}
-            {editButton}
+            {isTicketOwner && editButton}
           </>
         )}
       </div>

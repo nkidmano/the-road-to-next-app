@@ -9,7 +9,9 @@ type TicketEditPageProps = {
 
 export default async function TicketEditPage({ params }: TicketEditPageProps) {
   const { ticketId } = await params;
+  // const { user } = await getAuth();
   const ticket = await getTicket(ticketId);
+  // const isTicketOwner = isOwner(user, ticket);
 
   if (!ticket) {
     notFound();

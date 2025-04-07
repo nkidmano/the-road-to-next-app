@@ -10,6 +10,7 @@ import {
   toActionState,
 } from "@/components/form/utils/to-action-state";
 import { getAuth } from "@/features/auth/actions/get-auth";
+import { isOwner } from "@/features/auth/utils/is-owner";
 import { prisma } from "@/lib/prisma";
 import { signInPath, ticketsPath } from "@/path";
 import { toCent } from "@/utils/currency";
@@ -49,6 +50,13 @@ export async function upsertTicket(
   const { title, content, deadline, bounty } = Object.fromEntries(formData);
 
   try {
+    if (id) {
+      const ticket = await prisma.ticket.findUnique({ where: { id } });
+      if (!ticket || !isOwner(user, ticket)) {
+        return toActionState("ERROR", "Not Authorized");
+      }
+    }
+
     const data = upsertTicketSchema.parse({
       title: title as string,
       content: content as string,

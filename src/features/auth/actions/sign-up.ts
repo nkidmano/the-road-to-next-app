@@ -10,7 +10,7 @@ import {
   fromErrorToActionState,
   toActionState,
 } from "@/components/form/utils/to-action-state";
-import { createUserSession } from "@/features/auth/utils";
+import { createUserSession } from "@/features/auth/utils/create-user-session";
 import { prisma } from "@/lib/prisma";
 import { ticketsPath } from "@/path";
 
